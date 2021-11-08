@@ -1,6 +1,7 @@
 from turtle import Turtle, Screen
 
 from random import random, randint, uniform
+
 turtle_obj = Turtle()
 turtle_obj.shape("arrow")
 turtle_obj.color('blue')
@@ -13,8 +14,7 @@ turtle_obj.speed('fastest')
 
 
 def draw_shape(obj, num):
-
-    angle = 360/num
+    angle = 360 / num
     # color(random(),random(),random())
     for _ in range(num):
         obj.forward(100)
@@ -36,8 +36,8 @@ def walk(obj):
 
 
 def spirograph(obj):
-    tilt = uniform(5,10)
-    iterations = int(360/tilt+1)
+    tilt = uniform(5, 10)
+    iterations = int(360 / tilt + 1)
     for iteration in range(iterations):
         obj.circle(100)
         obj.color(random(), random(), random())
@@ -61,8 +61,6 @@ def draw_painting(obj):
             obj.goto(x, y)
         y += 40
         x = -400
-
-
 
 
 draw_painting(turtle_obj)
