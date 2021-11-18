@@ -63,8 +63,8 @@ def draw_painting(obj):
         x = -400
 
 
-draw_painting(turtle_obj)
-# spirograph(turtle_obj)
+# draw_painting(turtle_obj)
+spirograph(turtle_obj)
 # walk(turtle_obj)
 
 screen = Screen()
