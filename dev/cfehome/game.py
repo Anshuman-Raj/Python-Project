@@ -1,7 +1,8 @@
-from turtle import Turtle, Screen
+from turtle import Screen
 from time import sleep
 from snake import Snake
 from food import Food
+from tkinter import Tk, Label
 
 screen = Screen()
 screen.setup(width=600, height=600)
@@ -13,13 +14,13 @@ food = Food()
 food.add_food()
 screen.listen()
 game_is_on = True
+snake.update_score()
 while game_is_on:
-    if food.x()-20 <= snake.x() <= food.x()+20:
-        if food.y()-20 <= snake.y() <= food.y()+20:
-            snake.eat()
-            food.add_food()
-            snake.update_score()
-            # print(food.x(), snake.x())
+    if snake.head.distance(food.obj) < 15:
+        snake.eat()
+        food.add_food()
+        snake.update_score()
+        # print(food.x(), snake.x())
     screen.update()
     snake.move()
     game_is_on = snake.body_check()
@@ -28,9 +29,11 @@ while game_is_on:
     screen.onkeypress(key="Left", fun=snake.move_left)
     screen.onkeypress(key="Right", fun=snake.move_right)
 
-
-    if snake.body[0].xcor() >= 280 or snake.body[0].xcor() <= -280 or snake.body[0].ycor() >= 280 or snake.body[
-        0].ycor() <= -280:
+    if snake.body[0].xcor() >= 280 or snake.body[0].xcor() <= -280 or snake.body[0].ycor() >= 280 or \
+            snake.body[0].ycor() <= -280:
         game_is_on = False
-    sleep(0.1)
+
+    sleep(0.15)
+snake.game_over()
+
 screen.mainloop()

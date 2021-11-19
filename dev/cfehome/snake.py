@@ -1,10 +1,10 @@
 from turtle import Turtle
-from time import sleep
 
 
 class Snake:
     def __init__(self):
         self.body = []
+
         self.points = 0
         self.score = Turtle()
         self.score.color('green')
@@ -12,7 +12,8 @@ class Snake:
         self.score.goto(0, 265)
         self.score.hideturtle()
         self.create()
-        self.body_cordinates = [[x.xcor(), x.ycor()] for x in self.body[1:]]
+        self.head = self.body[0]
+        self.body_coordinates = [[x.xcor(), x.ycor()] for x in self.body[1:]]
 
     def create(self):
         for i in range(3):
@@ -27,7 +28,7 @@ class Snake:
             self.body[segment].goto(x=self.body[segment - 1].xcor(), y=self.body[segment - 1].ycor())
         # break
         self.body[0].forward(20)
-        sleep(0.1)
+        # sleep(0.1)
 
     def move_left(self):
         if self.body[0].heading() != 0:
@@ -55,12 +56,13 @@ class Snake:
         self.points += 1
 
     def body_check(self):
-        self.body_cordinates = [[x.xcor(), x.ycor()] for x in self.body[1:]]
-        if [self.body[0].xcor(), self.body[0].ycor()] in self.body_cordinates:
+        self.body_coordinates = [[x.xcor(), x.ycor()] for x in self.body[1:]]
+        if [self.body[0].xcor(), self.body[0].ycor()] in self.body_coordinates:
             return False
         else:
             return True
 
+    # to give out coordinates of snake's head
     def x(self):
         return self.body[0].xcor()
 
@@ -70,3 +72,8 @@ class Snake:
     def update_score(self):
         self.score.clear()
         self.score.write(f"Score: {self.points}", align='center', font=('Arial', 24, 'normal'))
+
+    def game_over(self):
+        self.score.goto(x=0, y=0)
+        self.score.color('red')
+        self.score.write("Game Over", align='center', font=('Arial', 24, 'normal'))
