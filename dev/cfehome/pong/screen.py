@@ -39,7 +39,8 @@ def start():
     temp.clear()
     while paddle_left.score < 5 and paddle_right.score < 5:
         ball.move()
-        sleep(0.10)
+        screen.update()
+        sleep(0.095)
         screen.onkeypress(key="Up", fun=paddle_right.move_up)
         screen.onkeyrelease(key='Up', fun=None)
         screen.onkeypress(key="Down", fun=paddle_right.move_down)
@@ -48,6 +49,7 @@ def start():
         screen.onkeyrelease(key='w', fun=None)
         screen.onkeypress(key="s", fun=paddle_left.move_down)
         screen.onkeyrelease(key='s', fun=None)
+        screen.update()
         if paddle_left.distance(ball.ball) <= 20:
             ball.collide_with_paddle()
         if paddle_right.distance(ball.ball) <= 20:
