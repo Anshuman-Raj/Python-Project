@@ -41,7 +41,7 @@ while paddle_left.score < 5 and paddle_right.score < 5:
         ball.collide_with_paddle()
     if paddle_right.distance(ball.ball) <= 20:
         ball.collide_with_paddle()
-    sleep(0.08)
+    sleep(0.02)
     ball.collide_with_wall()
     ball.keep_score(paddle_left, paddle_right)
     screen.update()

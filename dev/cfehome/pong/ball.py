@@ -1,6 +1,6 @@
 from turtle import Turtle
 from random import randint
-import time
+# import time
 
 
 class Ball:
@@ -15,7 +15,7 @@ class Ball:
 
     def move(self):
         self.ball.forward(25)
-        time.sleep(0.01)
+        # time.sleep(0.01)
 
     def collide_with_paddle(self):
         angel_of_incidence = self.ball.heading()
@@ -25,7 +25,10 @@ class Ball:
     def collide_with_wall(self):
         if self.ball.ycor() >= 270 or self.ball.ycor() <= -270:
             self.ball.setheading(360 - self.ball.heading())
-
+        elif 75 <= self.ball.heading() <= 90:
+            self.ball.setheading(60)
+        elif 265 <= self.ball.heading() <= 270:
+            self.ball.setheading(250)
         else:
             pass
 
