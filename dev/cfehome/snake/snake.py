@@ -6,12 +6,14 @@ class Snake:
         self.body = []
 
         self.points = 0
+        self.high_score = 0
         self.score = Turtle()
         self.score.color('green')
         self.score.pu()
         self.score.goto(0, 265)
         self.score.hideturtle()
         self.create()
+        self.load_high_score()
         self.head = self.body[0]
         self.body_coordinates = [[x.xcor(), x.ycor()] for x in self.body[1:]]
 
@@ -71,9 +73,22 @@ class Snake:
 
     def update_score(self):
         self.score.clear()
-        self.score.write(f"Score: {self.points}", align='center', font=('Arial', 24, 'normal'))
+        self.score.write(f"Score: {self.points}    High Score: {self.high_score}", align='center', font=('Arial', 24, 'normal'))
 
     def game_over(self):
+
+        if self.points > self.high_score:
+            self.high_score = self.points
+            with open('highscore.txt', 'w') as highscore:
+                highscore.write(str(self.high_score))
+
         self.score.goto(x=0, y=0)
         self.score.color('red')
         self.score.write("Game Over", align='center', font=('Arial', 24, 'normal'))
+
+    def load_high_score(self):
+        try:
+            with open('highscore.txt', 'r') as highscore:
+                self.high_score = int(highscore.read())
+        except:
+            pass
